@@ -13,30 +13,7 @@
 <body>
     <header class="navbar-index">
         <img class="logo-nav" src="static/imagenes/logo-blanco-furaveri.png" class="logo" alt="Logo Hotel Furaveri">
-        <section class="nav">
-          
-            <nav id="func-admin" class="funcAdminInactivo">
-                <a href="listadoCotizaciones.html"> 
-                    <button class="boton-header">LISTAR COTIZACIONES</button>
-                </a>
-                <a href="modificacionesCotizaciones.html"> 
-                    <button class="boton-header">MODIFICAR COTIZACIÓN</button>
-                </a>
-                <a href="listadoEliminarCotizaciones.html"> 
-                    <button class="boton-header">ELIMINAR COTIZACIÓN</button>
-                </a>
-            </nav>
-            <nav id="func-admin" class="funcAdminInactivo">
-                <a href="listadoConsultas.html"> 
-                    <button class="boton-header">LISTAR CONSULTAS</button>
-                </a>
-                <a href="modificaciones.Consultas.html"> 
-                    <button class="boton-header">MODIFICAR CONSULTAS</button>
-                </a>
-                <a href="listadoEliminarConsultas.html"> 
-                    <button class="boton-header">ELIMINAR CONSULTAS</button>
-                </a>
-            </nav>
+        <section class="nav"  id="menuAdmin">
         </section>
     </header>
 
@@ -93,29 +70,16 @@
                     <option value="NO">No</option>
                 </select>
 
+                <p id="solicitud" class="solicitud"></p>
 
                 <button type="submit" class="boton2-form">Guardar Cambios</button>
-                <a href="modificaciones.html" class="boton3-form">Cancelar</a>
+                <a href="index.html" class="boton3-form">Cancelar</a>
             </form>
         </div>
     </div>
 
     <footer class="footer" id="footer"></footer>
     <script>
-
-
-        //armamos bloque footer
-        let footer =`
-            <a href="#header"><img src="static/imagenes/logo-negro-furaveri.png" alt="Logo Hotel" class="logo-footer"></a>
-            <section class="social">
-                <a href="https://www.facebook.com/" target="_blank"><img src="static/imagenes/facebook.png" alt="Facebook"></a>
-                <a href="https://www.instagram.com/" target="_blank"><img src="static/imagenes/instagram.png" alt="Instagram"></a>
-                <a href="https://www.twitter.com" target="_blank"><img src="static/imagenes/twitter.png" alt="Twitter"></a>
-                <a href="https://www.whatsapp.com/" target="_blank"><img src="static/imagenes/whatsapp.png" alt="Watsapp"></a>
-            </section>
-        `;
-        document.getElementById("footer").innerHTML = footer
-
 
 
 
@@ -216,6 +180,35 @@
         // Se usa para enviar los datos modificados del cotizacion al servidor.
         function guardarCambios(event) {
             event.preventDefault();
+            let checkin = new Date(document.getElementById("checkin").value)
+            let checkout = new Date(document.getElementById("checkout").value)
+            let fechaActual = new Date()
+            
+            let tipoHabitacion =  document.getElementById("tipoHabitacion").value
+            let cantidadAdultos = document.getElementById("cantidadAdultos").value
+            let cantidadMenores = document.getElementById("cantidadMenores").value
+            let cantidadHabitaciones = document.getElementById("cantidadHabitaciones").value
+            
+            let email = document.getElementById("email").value
+            
+            if ( checkin <= fechaActual || checkout <= checkin || isNaN(checkout) || isNaN(checkin) ) {
+                document.getElementById("solicitud").textContent = 
+                `Verifique las fechas ingresadas`
+            } else if (tipoHabitacion === "" ) {
+                document.getElementById("solicitud").textContent = 
+                `Debe seleccionar un tipo de habitación`
+            } else if (cantidadAdultos <= "0" || cantidadMenores < "0" ) {
+                document.getElementById("solicitud").textContent = 
+                `Verifique las cantidades de huespedes ingresadas`
+            } else if (cantidadHabitaciones <= "0" ) {
+                document.getElementById("solicitud").textContent = 
+                `La cantidad de habitaciones debe ser mayor a 0`
+            } else if (validarmail(email) === false ){
+                document.getElementById("solicitud").textContent = 
+                `El email no es valido`
+            } else {
+
+
 
             const formData = new FormData();
             formData.append('codigo', codigo);
@@ -256,7 +249,7 @@
 
             limpiarFormulario()
         }
-
+    }
         function limpiarFormulario() {
             document.getElementById('codigo').value = '';
             document.getElementById('checkin').value = '';
@@ -314,5 +307,6 @@
 
     </script>
     <script src="static/js/fechas.js" defer></script>
+    <script src="static/js/header-footer-Admin.js" defer></script> 
 </body>
 </html>
