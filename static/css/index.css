@@ -80,6 +80,10 @@ header{
     color: #0394bb;
 }
 
+.adm-item{
+    text-decoration: none;
+    color: white;
+}
 #btn-item{
     display: none;
 }

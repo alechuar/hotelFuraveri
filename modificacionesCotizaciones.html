@@ -101,8 +101,7 @@
 
         document.getElementById('form-obtener-cotizacion').addEventListener('submit', obtenerCotizacion);
         document.getElementById('form-guardar-cambios').addEventListener('submit', guardarCambios);
-        // document.getElementById('nuevaImagen').addEventListener('change', seleccionarImagen);
-
+ 
         // Se ejecuta cuando se envía el formulario de consulta. Realiza una solicitud GET a la API y obtiene los datos del cotizacion correspondiente al código ingresado.
         function obtenerCotizacion(event) {
             event.preventDefault();
@@ -147,68 +146,17 @@
                 document.getElementById('email').value = email;
                 document.getElementById('asignada').value = asignada;
                 
-
-            //     const imagenActual = document.getElementById('imagen-actual');
-            //     if (imagen_url && !imagenSeleccionada) { // Verifica si imagen_url no está vacía y no se ha seleccionado una imagen
-                    
-            //         // imagenActual.src = './static/imagenes/' + imagen_url;                    
-            //         imagenActual.src = 'https://www.pythonanywhere.com/user/juanpablocodo/files/home/juanpablocodo/mysite/static/imagenes/' + imagen_url;                    
-			// //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
-            //         //imagenActual.src = 'https://www.pythonanywhere.com/user/USUARIO/files/home/USUARIO/mysite/static/imagenes/' + imagen_url;
-            //         imagenActual.style.display = 'block'; // Muestra la imagen actual
-            //     } else {
-            //         imagenActual.style.display = 'none'; // Oculta la imagen si no hay URL
-            //     }
-
                 document.getElementById('datos-cotizacion').style.display = 'block';
             } else {
                 document.getElementById('datos-cotizacion').style.display = 'none';
             }
         }
 
-        // // Se activa cuando el usuario selecciona una imagen para cargar.
-        // function seleccionarImagen(event) {
-        //     const file = event.target.files[0];
-        //     imagenSeleccionada = file;
-        //     imagenUrlTemp = URL.createObjectURL(file); // Crea una URL temporal para la vista previa
-
-        //     const imagenVistaPrevia = document.getElementById('imagen-vista-previa');
-        //     imagenVistaPrevia.src = imagenUrlTemp;
-        //     imagenVistaPrevia.style.display = 'block';
-        // }
 
         // Se usa para enviar los datos modificados del cotizacion al servidor.
         function guardarCambios(event) {
             event.preventDefault();
-            let checkin = new Date(document.getElementById("checkin").value)
-            let checkout = new Date(document.getElementById("checkout").value)
-            let fechaActual = new Date()
-            
-            let tipoHabitacion =  document.getElementById("tipoHabitacion").value
-            let cantidadAdultos = document.getElementById("cantidadAdultos").value
-            let cantidadMenores = document.getElementById("cantidadMenores").value
-            let cantidadHabitaciones = document.getElementById("cantidadHabitaciones").value
-            
-            let email = document.getElementById("email").value
-            
-            if ( checkin <= fechaActual || checkout <= checkin || isNaN(checkout) || isNaN(checkin) ) {
-                document.getElementById("solicitud").textContent = 
-                `Verifique las fechas ingresadas`
-            } else if (tipoHabitacion === "" ) {
-                document.getElementById("solicitud").textContent = 
-                `Debe seleccionar un tipo de habitación`
-            } else if (cantidadAdultos <= "0" || cantidadMenores < "0" ) {
-                document.getElementById("solicitud").textContent = 
-                `Verifique las cantidades de huespedes ingresadas`
-            } else if (cantidadHabitaciones <= "0" ) {
-                document.getElementById("solicitud").textContent = 
-                `La cantidad de habitaciones debe ser mayor a 0`
-            } else if (validarmail(email) === false ){
-                document.getElementById("solicitud").textContent = 
-                `El email no es valido`
-            } else {
-
-
+            if (validaHabitaciones()){
 
             const formData = new FormData();
             formData.append('codigo', codigo);
@@ -220,12 +168,7 @@
             formData.append('cantidadHabitaciones', document.getElementById('cantidadHabitaciones').value);
             formData.append('email', document.getElementById('email').value);
             formData.append('asignada', document.getElementById('asignada').value);
-            
 
-            // // Si se ha seleccionado una imagen nueva, la añade al formData. 
-            // if (imagenSeleccionada) {
-            //     formData.append('imagen', imagenSeleccionada, imagenSeleccionada.name);
-            // }
 
             fetch(URL + 'cotizaciones/' + codigo, {
                 method: 'PUT',
@@ -274,39 +217,10 @@
 
             document.getElementById('datos-cotizacion').style.display = 'none';
         }
-        //// Restablece todas las variables relacionadas con el formulario a sus valores iniciales, lo que efectivamente "limpia" el formulario.
-        // function limpiarFormulario() {
-        //     document.getElementById('codigo').value = '';
-        //     document.getElementById('descripcionModificar').value = '';
-        //     document.getElementById('cantidadModificar').value = '';
-        //     document.getElementById('precioModificar').value = '';
-        //     document.getElementById('proveModificar').value = '';
-        //     document.getElementById('nuevaImagen').value = '';
-
-        //     const imagenActual = document.getElementById('imagen-actual');
-        //     imagenActual.style.display = 'none';
-
-        //     const imagenVistaPrevia = document.getElementById('imagen-vista-previa');
-        //     imagenVistaPrevia.style.display = 'none';
-
-        //     codigo = '';
-        //     descripcion = '';
-        //     cantidad = '';
-        //     precio = '';
-        //     proveedor = '';
-        //     imagen_url = '';
-        //     imagenSeleccionada = null;
-        //     imagenUrlTemp = null;
-        //     mostrarDatosCotizacion = false;
-
-        //     document.getElementById('datos-cotizacion').style.display = 'none';
-        // }
-
-   
-
 
     </script>
     <script src="static/js/fechas.js" defer></script>
     <script src="static/js/header-footer-Admin.js" defer></script> 
+    <script src="static/js/validaciones.js"></script>    
 </body>
 </html>

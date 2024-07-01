@@ -22,7 +22,7 @@ header{
     height: 350px;
     width: 100vw;
     background: linear-gradient(rgba(5, 7, 12, 0.5),rgba(5, 7, 12, 0.5)),
-    url('/img/header6.png');
+    url('/static/imagenes/header4.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -476,3 +476,60 @@ main{
         margin: 5px;
     }
 }
+
+
+
+.form-admin{
+    display: none;
+}
+
+.btn-item{
+    padding: 10px 30px 0 0 ;
+    margin: 80px 0 0 20px ;
+}
+
+.btn-item:hover{
+    cursor: pointer;
+    color: #0394bb;
+}
+
+.adm-item{
+    text-decoration: none;
+    color: white;
+}
+#btn-item{
+    display: none;
+}
+
+#btn-item:checked ~ .form-admin{
+    display: block;
+}
+
+.form-admin{
+    padding: 20px;
+}
+
+#func-admin{
+    padding: 10px;
+}
+
+.funcAdminInactivo{
+    display: none;
+}
+
+.admin{
+    padding: 20px 15px;
+    margin: 10px;
+    background: #212121;
+    color: white;
+    text-decoration: none;
+    border: 1px solid rgb(129, 129, 129);
+}
+
+.admin:hover{
+    border: 1.5px solid white;
+    background: #3c3c3c;
+    cursor: pointer;
+    scale: 1.03;
+}
+

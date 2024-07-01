@@ -257,6 +257,7 @@ input[type="submit"]:hover {
 .solicitud{
     grid-area: solicitud;
     display: flex;
-    /* color: greenyellow; */
-    background-color: #000;
+    color: red;
+    /* background-color: #000; */
+    background: #212121;
 }

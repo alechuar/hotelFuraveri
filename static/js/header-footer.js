@@ -15,6 +15,24 @@ let header = `
         <li class="li"><a class="item" href="habitaciones.html">HABITACIONES</a></li>
         <li class="li"><a class="item" href="gastronomia.html">GASTRONOMIA</a></li>
         <li class="li"><a class="item" href="contacto.html">CONTACTO</a></li>
+        
+        <li class="li">
+              <!--  <section class="administradores"> -->
+                <label for="btn-item" class="item">ADMIN</label>
+                <input type="checkbox" id="btn-item">
+                <div class="form-admin">
+                  
+                    <label for="usuario" class="adm-item">Usuario:</label>
+                    <input type="text" name="usuario" id="usuario">
+                    <br>
+                    <label for="contrasena" class="adm-item">Contraseña:</label>
+                    <input type="password" name="contrasena" id="contrasena">
+                    <br>
+                    <button id="btn-ingre" onclick="ingresarAdministrador()">INGRESAR</button>
+                </div>
+
+           <!-- </section>-->
+        </li>
     </ul>
 </nav>
 `; 
